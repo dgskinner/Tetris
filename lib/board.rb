@@ -29,4 +29,31 @@ class Board
       p row
     end
   end
+  
+  def find_lowest_occupied_row(piece, column)
+    lowest_occupied = 0
+    broken = false
+    (0..9).each do |row|
+      (column...(column + piece.width)).each do |col|
+        if @grid[row][col] == "X"
+          broken = true
+          break
+        end
+      end
+      
+      break if broken
+      lowest_occupied += 1
+    end
+    
+    lowest_occupied
+  end
+  
+  def place_piece(piece, column)
+    lowest_occupied = find_lowest_occupied_row(piece, column)
+    piece.height.times do |row|
+      piece.width.times do |col|
+        @grid[lowest_occupied - piece.height + row][column + col] = piece.view[row][col]
+      end
+    end
+  end
 end
