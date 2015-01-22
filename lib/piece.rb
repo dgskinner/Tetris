@@ -19,3 +19,15 @@ class Piece
     @view = @view.transpose.map{ |row| row.reverse }
   end
 end
+
+class Block < Piece 
+  def initialize
+    @view = [["X", "X"], ["X", "X"]] 
+  end
+end
+
+class Rod < Piece
+  def initialize
+    @view = [["X"], ["X"], ["X"], ["X"]]
+  end
+end
