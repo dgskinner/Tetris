@@ -7,11 +7,13 @@ class Board
     @grid = Array.new(10){ Array.new(10, " ") }
   end
   
-  def clear_full_row(full_row)
-    full_row.downto(1).each do |row|
-      @grid[row] = @grid[row - 1]
+  def clear_full_rows(full_rows)
+    full_rows.each do |full_row|
+      full_row.downto(1).each do |row|
+        @grid[row] = @grid[row - 1]
+      end
+      @grid[0] = Array.new(10, " ")
     end
-    @grid[0] = Array.new(10, " ")
   end
   
   def display
@@ -20,16 +22,27 @@ class Board
     end
   end
   
-  def clear_full_rows 
-    cleared = false
+  # def clear_full_rows
+  #   cleared = false
+  #   (0..9).each do |row|
+  #     if @grid[row].all?{ |square| square == "X" }
+  #       clear_full_row(row)
+  #       cleared = true
+  #     end
+  #   end
+  #
+  #   cleared
+  # end
+  
+  def find_full_rows
+    full_rows = []
     (0..9).each do |row|
       if @grid[row].all?{ |square| square == "X" }
-        clear_full_row(row) 
-        cleared = true
+        full_rows << row
       end
     end
     
-    cleared
+    full_rows
   end
   
   def find_lowest_occupied_row(piece, column)

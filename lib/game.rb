@@ -33,13 +33,17 @@ class Game
   end
   
   def play
+    display_turn
     while true 
-      display_turn
       empty_column = find_empty_column
-      if empty_column
-        @board.place_piece(@next_piece, empty_column)
+      @board.place_piece(@next_piece, empty_column)
+      display_turn
+      full_rows = @board.find_full_rows
+      unless full_rows.empty?
+        sleep(0.2)
+        @board.clear_full_rows(full_rows)
+        display_turn
       end
-      @board.clear_full_rows
       sleep(1)
     end
   end
