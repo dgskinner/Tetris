@@ -22,18 +22,6 @@ class Board
     end
   end
   
-  # def clear_full_rows
-  #   cleared = false
-  #   (0..9).each do |row|
-  #     if @grid[row].all?{ |square| square == "X" }
-  #       clear_full_row(row)
-  #       cleared = true
-  #     end
-  #   end
-  #
-  #   cleared
-  # end
-  
   def find_full_rows
     full_rows = []
     (0..9).each do |row|
