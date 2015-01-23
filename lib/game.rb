@@ -5,7 +5,15 @@ class Game
   
   def initialize
     @board = Board.new
-    @next_piece = Block.new
+    @next_piece = random_piece
+  end
+  
+  def display_turn 
+    system("clear")
+    puts "Next Piece: \n\n"
+    @next_piece.display
+    puts ""
+    @board.display
   end
   
   def find_empty_column
@@ -22,5 +30,27 @@ class Game
     end
     
     false
+  end
+  
+  def play
+    while true 
+      display_turn
+      empty_column = find_empty_column
+      if empty_column
+        @board.place_piece(@next_piece, empty_column)
+      end
+      @board.clear_full_rows
+      sleep(1)
+    end
+  end
+  
+  
+  def random_piece
+    case rand(2)
+    when 0
+      return Block.new
+    when 1
+      return Rod.new
+    end
   end
 end
