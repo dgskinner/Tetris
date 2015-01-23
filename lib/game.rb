@@ -2,6 +2,7 @@ require_relative 'board'
 
 class Game
   attr_reader :board
+  attr_writer :next_piece
   
   def initialize
     @board = Board.new
@@ -9,10 +10,13 @@ class Game
   end
   
   def display_turn 
+    @next_piece = random_piece
     system("clear")
     puts "Next Piece: \n\n"
     @next_piece.display
-    puts ""
+    (5 - @next_piece.height).times do 
+      puts ""
+    end
     @board.display
   end
   
@@ -36,7 +40,11 @@ class Game
     display_turn
     while true 
       empty_column = find_empty_column
-      @board.place_piece(@next_piece, empty_column)
+      if empty_column
+        @board.place_piece(@next_piece, empty_column)
+      else
+        @board.place_piece(@next_piece, rand(9))
+      end
       display_turn
       full_rows = @board.find_full_rows
       unless full_rows.empty?
@@ -52,9 +60,9 @@ class Game
   def random_piece
     case rand(2)
     when 0
-      return Block.new
+      Block.new
     when 1
-      return Rod.new
+      Rod.new
     end
   end
 end
