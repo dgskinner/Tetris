@@ -31,3 +31,33 @@ class Rod < Piece
     @view = [["X"], ["X"], ["X"], ["X"]]
   end
 end
+
+class LeftEl < Piece
+  def initialize
+    @view = [["X", " "], ["X", " "], ["X", "X"]]
+  end
+end
+
+class RightEl < Piece
+  def initialize
+    @view = [[" ", "X"], [" ", "X"], ["X", "X"]]
+  end
+end
+
+class Zig < Piece
+  def initialize
+    @view = [["X", "X", " "], [" ", "X", "X"]]
+  end
+end
+
+class Zag < Piece
+  def initialize
+    @view = [[" ", "X", "X"], ["X", "X", " "]]
+  end
+end
+
+class Tee < Piece
+  def initialize
+    @view = [[" ", "X", " "], ["X", "X", "X"]]
+  end
+end

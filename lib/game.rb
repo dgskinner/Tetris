@@ -68,9 +68,9 @@ class Game
   
   def random_piece
     case rand(2)
-    when 0
+    when 0 
       Block.new
-    when 1
+    when 1 
       Rod.new
     end
   end
