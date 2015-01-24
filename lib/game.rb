@@ -43,7 +43,7 @@ class Game
       if empty_column
         @board.place_piece(@next_piece, empty_column)
       else
-        @board.place_piece(@next_piece, rand(9))
+        place_piece_randomly
       end
       display_turn
       full_rows = @board.find_full_rows
@@ -52,10 +52,13 @@ class Game
         @board.clear_full_rows(full_rows)
         display_turn
       end
-      sleep(1)
+      sleep(0.5)
     end
   end
   
+  def place_piece_randomly
+    @board.place_piece(@next_piece, rand(11 - @next_piece.width))
+  end
   
   def random_piece
     case rand(2)
